@@ -1,4 +1,5 @@
 'use server';
+
 import { z } from 'zod';
 import { sql } from '@vercel/postgres';
 import { revalidatePath } from 'next/cache';
@@ -80,7 +81,10 @@ export async function createInvoice(prevState: State, formData: FormData) {
   
 }
 
-export async function updateInvoice(id: string, formData: FormData) {
+export async function updateInvoice(
+  id: string,
+  prevState: State,
+  formData: FormData) {
   
   const validatedFields = UpdateInvoice.safeParse({
     customerId: formData.get('customerId'),
